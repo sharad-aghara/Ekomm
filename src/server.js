@@ -4,6 +4,7 @@ const { PORT, URI } = require('./config/index.js');
 const server = express();
 
 const productRoutes = require('./routes/productRoute.js');
+const userAuth = require('./routes/userAuthRoute.js')
 
 // Middleware
 server.use(express.json());
@@ -16,6 +17,7 @@ mongoose
 
 // connect main route to server
 // server.use(App);
+server.use('/api', userAuth);
 server.use('/api/products', productRoutes);
 
 // start up server
