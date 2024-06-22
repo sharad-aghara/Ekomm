@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { PORT, URI } = require('./config/index.js');
 const server = express();
+const cartRoutes = require('./routes/cartRoute.js');
 
 const productRoutes = require('./routes/productRoute.js');
 const userAuth = require('./routes/userAuthRoute.js')
@@ -19,6 +20,7 @@ mongoose
 // server.use(App);
 server.use('/api', userAuth);
 server.use('/api/products', productRoutes);
+server.use('/api/cart', cartRoutes);
 
 // start up server
 server.listen(PORT, () =>
