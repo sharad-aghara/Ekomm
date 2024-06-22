@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const {SECRET_ACCESS_TOKEN} = require('../config/index');
 
 const userSchema = new mongoose.Schema({
     username: {
@@ -59,7 +61,21 @@ const userSchema = new mongoose.Schema({
             },
         },
     },
-});
+},
+    { timestamps: true }
+);
+
+
+// generate jwt token function (generateAccessJWT())
+userSchema.methods.generateAccessJWT = function () {
+    let payload = {
+        id: this._id,
+    };
+
+    return jwt.sign(payload, SECRET_ACCESS_TOKEN, {
+        expiresIn: '1m',
+    });
+};
 
 
 // pre hook function

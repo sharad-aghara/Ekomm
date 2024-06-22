@@ -3,6 +3,7 @@ const Validate = require('../middleware/validate');
 const { check } = require('express-validator');
 // const { Register, Login, Logout } = require('../controller/');
 const { Register, Login } = require('../controller/userAuthController');
+const { SECRET_ACCESS_TOKEN } = require('../config/index');
 
 const router = express.Router();
 

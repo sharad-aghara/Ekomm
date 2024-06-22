@@ -90,15 +90,17 @@ async function Login(req, res) {
                     "Invalid email or password. Please try again with the correct credentials.",
             });
 
-        // let options = {
-        //     maxAge: 20 * 60 * 100,   // expire in 20 minute (Cookie age)
-        //     httpOnly: true,
-        //     secure: true,
-        //     sameSite: "None",
-        // };
 
-        // const token = user.generateAccessJWT(); // generate access token for user
-        // res.cookie("SessionID", token, options);    // set the token to response header
+        // Generate cookie to pass JWT
+        let options = {
+            maxAge: 20 * 60 * 100,   // expire in 20 minute (Cookie age)
+            httpOnly: true,
+            secure: true,
+            sameSite: "None",
+        };
+
+        const token = user.generateAccessJWT(); // generate access token for user
+        res.cookie("SessionID", token, options);    // set the token to response header
 
         const { password, ...user_data } = user._doc;
 
