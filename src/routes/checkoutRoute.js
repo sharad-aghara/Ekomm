@@ -2,6 +2,7 @@ const express = require('express');
 const { check } = require('express-validator');
 const Validate = require('../middleware/validate');
 const { Checkout } = require('../controller/checkOutController');
+const {Verify, VerifyRole} = require('../middleware/verify');
 
 const router = express.Router();
 
@@ -9,10 +10,6 @@ const router = express.Router();
 router.post(
     '/checkout',
     [
-        check('userId')
-            .not()
-            .isEmpty()
-            .withMessage('User ID is required'),
         check('name')
             .not()
             .isEmpty()
@@ -34,6 +31,7 @@ router.post(
             .isEmpty()
             .withMessage('CVV is required')
     ],
+    Verify,
     Validate,
     Checkout
 );

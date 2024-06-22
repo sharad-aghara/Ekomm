@@ -2,8 +2,10 @@ const User = require('../models/userModel');
 
 // Checkout logic
 async function Checkout(req, res) {
-    const { userId, name, address, cardNumber, expirationDate, cvv } = req.body;
+    const { name, address, cardNumber, expirationDate, cvv } = req.body;
     try {
+        const userId = req.userId;
+
         // Validate checkout information
         if (!name || !address || !cardNumber || !expirationDate || !cvv) {
             return res.status(400).json({
