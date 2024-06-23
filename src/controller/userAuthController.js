@@ -104,6 +104,8 @@ async function Login(req, res) {
 
         const { password, ...user_data } = user._doc;
 
+        console.log("user_data: ", user_data);
+
         res.status(200).json({
             status: "success",
             data: [user_data],
