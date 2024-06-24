@@ -73,7 +73,7 @@ userSchema.methods.generateAccessJWT = function () {
     };
 
     return jwt.sign(payload, SECRET_ACCESS_TOKEN, {
-        expiresIn: '1m',
+        expiresIn: '10m',
     });
 };
 
