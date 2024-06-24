@@ -4,15 +4,15 @@ get product by ID - localhost:5005/api/products/:id
 
 register - localhost:5005/api/register
 {
-  "email": "jetha@gmail.com",
-  "username": "jetha",
+  "email": "exp@gmail.com",
+  "username": "exp",
   "password": "000000"
 }
 
 
 Login - localhost:5005/api/login
 {
-  "email": "jetha@gmail.com",
+  "email": "exp@gmail.com",
   "password": "000000"
 }
 
