@@ -10,12 +10,19 @@ const checkoutRoutes = require('./routes/checkoutRoute.js');
 const cors = require('cors');
 
 // Enable CORS
-server.use(cors({
-    origin: 'http://localhost:4200', // Allow requests from Angular development server
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow these HTTP methods
-    allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
-  }));
+server
+.use(cors({
+    origin: true,
 
+    credentials: true 
+}));
+
+
+// {
+//     origin: 'http://localhost:4200', // Allow requests from Angular development server
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow these HTTP methods
+//     allowedHeaders: ['Content-Type', 'Authorization'], // Allow these headers
+//   }
 // Middleware
 server.use(express.json());
 
