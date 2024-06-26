@@ -10,14 +10,14 @@ async function Verify(req, res, next) {
 
         if (!authHeader) res.sendStatus(401);    // if there is no cookie from requr=est header
 
-        const cookie = authHeader.split("=")[1];    // If there is, split the cookie string to get the actual jwt
+        const cookie = authHeader?.split("=")[1];    // If there is, split the cookie string to get the actual jwt
 
         if (!cookie) {
             return res.status(401).json({ message: "Unauthorized: No token provided" });
         }
 
         // Split the cookie to get the JWT token
-        const accessToken = cookie.split(";")[0];
+        const accessToken = cookie?.split(";")[0];
 
         // Blacklist --Logout
         // const checkIfBlacklisted = await Blacklist.findOne({ token: accessToken }); // Check if that token is blacklisted
