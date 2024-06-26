@@ -1,7 +1,11 @@
+const express = require('express');
 const User = require('../models/userModel');
 const bcrypt = require('bcrypt');
 // const Blacklist = require('../models/Blacklist');
+const app = express();
+const cookieParser = require('cookie-parser');
 
+app.use(cookieParser());
 
 // Register logic
 async function Register(req, res) {
@@ -104,7 +108,10 @@ async function Login(req, res) {
 
         const { password, ...user_data } = user._doc;
 
-        console.log("user_data: ", user_data);
+        res.cookie("userId", user._id, options);
+
+        console.log("Login successfull");
+        // console.log("user_data: ", user_data);
 
         res.status(200).json({
             status: "success",
