@@ -60,4 +60,33 @@ const getCartItems = async (req, res) => {
     }
 };
 
-module.exports = { addToCart, getCartItems };
+
+// remove product
+const removeFromCart = async (req, res) => {
+    try {
+        const { userId, productId } = req.body;
+
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        // Find the index of the product in the cart
+        const cartIndex = user.cart.findIndex(item => item.product.toString() === productId);
+        if (cartIndex === -1) {
+            return res.status(404).json({ message: 'Product not found in cart' });
+        }
+
+        // Remove the product from the cart
+        user.cart.splice(cartIndex, 1);
+        
+        await user.save();
+
+        res.status(200).json({ message: 'Product removed from cart successfully', cart: user.cart });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+};
+
+module.exports = { addToCart, getCartItems, removeFromCart };
